@@ -1,0 +1,6 @@
+<launch>
+    <!-- Spawn model -->
+    <node name="spawn_urdf_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x 0 -y 0 -z 0.05 -urdf -param zed_description -model zed"
+        respawn="false" output="screen" />
+</launch>

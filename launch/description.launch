@@ -1,0 +1,6 @@
+<launch>
+    <param name="zed_description" command="$(find xacro)/xacro $(find zed_description)/urdf/zed.urdf.xacro" />
+    <node name='robot_state_publisher' pkg='robot_state_publisher' type='robot_state_publisher' output='screen'>
+        <remap from='robot_description' to='zed_description' />
+    </node>
+</launch>
