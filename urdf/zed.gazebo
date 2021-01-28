@@ -1,58 +1,58 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro='http://www.ros.org/wiki/xacro'>
-    <gazebo reference="$(arg camera_name)_camera_center_joint">
+    <gazebo reference="$(arg base_frame)">
         <sensor type="multicamera" name="stereo_camera">
-            <update_rate>6.0</update_rate>
-                <camera name="left">
-                <pose>0 0.035 0 0 0 0</pose>
-                <horizontal_fov>2.0944</horizontal_fov>
-                <image>
-                    <width>1280</width>
-                    <height>720</height>
-                    <format>B8G8R8</format>
-                </image>
-                <clip>
-                    <near>0.1</near>
-                    <far>100</far>
-                </clip>
-                <noise>
-                    <type>gaussian</type>
-                    <mean>0.0</mean>
-                    <stddev>0.007</stddev>
-                </noise>
+            <update_rate>30.0</update_rate>
+            <camera name="left">
+            <pose>0 0.06 0 0 0 0</pose>
+            <horizontal_fov>2.0944</horizontal_fov>
+            <image>
+                <width>1280</width>
+                <height>720</height>
+                <format>B8G8R8</format>
+            </image>
+            <clip>
+                <near>0.1</near>
+                <far>100</far>
+            </clip>
+            <noise>
+                <type>gaussian</type>
+                <mean>0.0</mean>
+                <stddev>0.007</stddev>
+            </noise>
             </camera>
             <camera name="right">
-                <pose>0 -0.035 0 0 0 0</pose>
-                <horizontal_fov>2.0944</horizontal_fov>
-                <image>
-                    <width>1280</width>
-                    <height>720</height>
-                    <format>B8G8R8</format>
-                </image>
-                <clip>
-                    <near>0.1</near>
-                    <far>100</far>
-                </clip>
-                <noise>
-                    <type>gaussian</type>
-                    <mean>0.0</mean>
-                    <stddev>0.007</stddev>
-                </noise>
+            <pose>0 -0.06 0 0 0 0</pose>
+            <horizontal_fov>2.0944</horizontal_fov>
+            <image>
+                <width>1280</width>
+                <height>720</height>
+                <format>B8G8R8</format>
+            </image>
+            <clip>
+                <near>0.1</near>
+                <far>100</far>
+            </clip>
+            <noise>
+                <type>gaussian</type>
+                <mean>0.0</mean>
+                <stddev>0.007</stddev>
+            </noise>
             </camera>
             <plugin name="stereo_camera_controller" filename="libgazebo_ros_multicamera.so">
-                <robotNamespace></robotNamespace>
-                <alwaysOn>true</alwaysOn>
-                <updateRate>6.0</updateRate>
-                <cameraName></cameraName>
-                <imageTopicName>image_raw</imageTopicName>
-                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                <frameName>left_camera_optical_frame</frameName>
-                <hackBaseline>0.07</hackBaseline>
-                <distortionK1>0.0</distortionK1>
-                <distortionK2>0.0</distortionK2>
-                <distortionK3>0.0</distortionK3>
-                <distortionT1>0.0</distortionT1>
-                <distortionT2>0.0</distortionT2>
+            <robotNamespace>$(arg tf_prefix)/$(arg base_frame)/</robotNamespace>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>30.0</updateRate>
+            <cameraName></cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>$(arg camera_name)_left_camera_optical_frame</frameName>
+            <hackBaseline>0.12</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
             </plugin>
         </sensor>
     </gazebo>

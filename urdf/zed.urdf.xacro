@@ -24,8 +24,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xacro:include filename="$(find zed_description)/urdf/materials.urdf.xacro" />
 
     <!-- Arguments -->
-
-
+    <xacro:arg name="tf_prefix"     default="" />
     <xacro:arg name="camera_name"   default="zed" />
     <xacro:arg name="camera_model"  default="zed" />
     <xacro:arg name="base_frame"    default="base_link" />
@@ -68,6 +67,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </geometry>
             <material name="${model}_mat" />
         </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://zed_description/meshes/${model}.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value=".135" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
     </link>
 
 <!-- Left Camera -->
@@ -138,4 +147,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <link name="$(arg camera_name)_temp_right_link" />
     </xacro:if>
+
+    <xacro:include filename="$(find zed_description)/urdf/zed.gazebo" />
 </robot>
